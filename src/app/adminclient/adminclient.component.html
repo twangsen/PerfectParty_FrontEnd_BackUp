@@ -1,0 +1,158 @@
+<br>
+<div style="background-color:rgba(176, 196, 222, 0.3); padding:40px 30px; border-radius: 20px">
+    <h2 style="text-align: center">All Clients</h2>
+    <div style="margin-left: 15%">
+        <button class="submit-btn" id='search'
+                style="width: 40%; display: inline; margin-right: 20px;"
+                (click)="show('search-clients'); show('search'); show('insert')">
+            Show Search
+        </button>
+        <button class="submit-btn" id='insert'
+                style="width: 40%; display: inline; margin-left: 20px;"
+                (click)="show('insert-clients'); show('insert'); show('search')">
+            Show Insert
+        </button>
+    </div>
+    <div style='display:none' id="search-clients">
+        <div class="card" style="padding: 20px;">
+            <div class="row row-space">
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input class="input--style-1" type="text" name="id" placeholder="ID"
+                                   matInput
+                                   maxlength="10"
+                                   [(ngModel)]="sID"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input class="input--style-1" type="text" name="first" placeholder="First Name"
+                                   matInput
+                                   maxlength="20"
+                                   [(ngModel)]="sFirst"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input class="input--style-1" type="text" name="last" placeholder="Last Name"
+                                   matInput
+                                   maxlength="20"
+                                   [(ngModel)]="sLast"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <div style="overflow: hidden; padding-bottom: 0px; display: flex; flex-direction: row;">
+                            <div class="select--no-search" style="padding-top: 20px">
+                                <div class="select-dropdown"></div>
+                            </div>
+                            <mat-form-field class="no-underline" >
+                                <input class="input--style-1" type="number" name="event" placeholder="Events Num >" style="margin-left: 5px;"
+                                       matInput
+                                       [(ngModel)]="sEvent"/>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="submit-btn" (click)="searchClients()">Search</button>
+        </div>
+        <button class="btn-delete" (click)="clearInput()">Clear Search</button>
+        <button class="btn-delete" (click)="show('search-clients'); show('search'); show('insert')">Hide Search</button>
+    </div>
+
+    <div style='display:none' id="insert-clients">
+        <div class="card" style="padding: 20px 20px 5px; margin-bottom: 0;">
+            <div class="row row-space">
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input readonly class="input--style-1" type="text" name="id" placeholder="Next Client ID is:"
+                                   matInput
+                                   [(ngModel)]="nextID"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="first" placeholder="First Name"
+                                   matInput
+                                   [(ngModel)]="iFirst" [formControl]="first" required/>
+                            <mat-error>{{getErrorMessage('first')}}</mat-error>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="last" placeholder="Last Name"
+                                   matInput
+                                   [(ngModel)]="iLast"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <button class="submit-btn" style="margin-top: -3px; height: 60px"
+                            (click)="insertClient(); show('insert-clients'); show('insert'); show('search')"
+                            [disabled]="!valid()">
+                        Insert
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button class="btn-delete" (click)="clearInput()">Clear Insert</button>
+        <button class="btn-delete" (click)="show('insert-clients'); show('insert'); show('search')">Hide Insert</button>
+    </div>
+
+    <br>
+    <div class="container">
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">Client ID</div>
+                <div class="col col-2">First Name</div>
+                <div class="col col-3">Last Name</div>
+                <div class="col col-4">Booked Events</div>
+                <div class="col col-5">Total budget</div>
+            </li>
+            <li class="table-row"
+                *ngFor="let client of clients"
+                [class.selected]="client === selectedClient"
+                (click)="onSelect(client); openDialog()">
+                <div class="col col-1">{{client.clientID}}</div>
+                <div class="col col-2">{{client.clientFirstName}}</div>
+                <div class="col col-3">{{client.clientLastName}}</div>
+                <div class="col col-5">{{client.numberEvents}}</div>
+                <div class="col col-5">{{client.totalBudget}}</div>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="selectedClient">
+        <h2>{{selectedClient.clientFirstName}} Details</h2>
+        <div><span>ID: </span>{{selectedClient.clientID}}</div>
+        <div>
+            <label>First Name:
+                <input [(ngModel)]="selectedClient.clientFirstName" placeholder="organizer"/>
+            </label>
+        </div>
+        <div>
+            <label>Last Name:
+                <input [(ngModel)]="selectedClient.clientLastName" placeholder="organizer"/>
+            </label>
+        </div>
+        <div><span>Total budgets: </span>{{selectedClient.totalBudget}}</div>
+        <div><span>Number of events booked:: </span>{{selectedClient.numberEvents}}</div>
+    </div>
+</div>

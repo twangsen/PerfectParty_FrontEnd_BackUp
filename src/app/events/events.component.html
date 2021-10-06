@@ -1,0 +1,152 @@
+<br>
+<div style="background-color:rgba(176, 196, 222, 0.3); padding:30px 30px; border-radius: 20px">
+  <h2 style="text-align: center" *ngIf="userid !== 'admin'">My Event</h2>
+  <h2 style="text-align: center" *ngIf="userid === 'admin'">Events</h2>
+
+
+  <div class="card" style="padding: 20px; margin-bottom: 40px;">
+    <div class="row row-space">
+
+      <div class="col-4">
+        <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+          <div style="overflow: hidden; padding-bottom: 0px; display: flex; flex-direction: row;">
+            <div class="select--no-search" style="padding-top: 20px">
+              <select name="driver-age" [(ngModel)]="sBudgetCompare">
+                <option><</option>
+                <option><=</option>
+                <option>=</option>
+                <option>></option>
+                <option>>=</option>
+              </select>
+              <div class="select-dropdown"></div>
+            </div>
+            <mat-form-field class="no-underline">
+              <input class="input--style-1" type="number" name="budget" style="margin-left: 5px;"
+                     matInput
+                     maxlength="10"
+                     [(ngModel)]="sBudget" placeholder="Budget"/>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+          <mat-form-field class="no-underline" style="width: 150px">
+            <input class="input--style-1" type="date" name="start date"
+                   matInput
+                   [(ngModel)]="sStartDate" placeholder="Start Date"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+          <mat-form-field class="no-underline">
+            <input class="input--style-1" type="text" name="type"
+                   matInput
+                   maxlength="20"
+                   [(ngModel)]="sType" placeholder="Event Type"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+          <mat-form-field class="no-underline">
+            <input class="input--style-1" type="text" name="organizer"
+                   matInput
+                   maxlength="20"
+                   [(ngModel)]="sName" placeholder="Organizer Name"/>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row row-space">
+      <div class="col-4">
+        <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+          <mat-form-field class="no-underline">
+            <input class="input--style-1" type="text" name="state"
+                   matInput
+                   maxlength="25"
+                   [(ngModel)]="sState" placeholder="State name"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+          <mat-form-field class="no-underline">
+            <input class="input--style-1" type="text" name="city"
+                   matInput
+                   maxlength="50"
+                   [(ngModel)]="sCity" placeholder="City name"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+          <mat-form-field class="no-underline">
+            <input class="input--style-1" type="text" name="zipcode"
+                   matInput
+                   maxlength="10"
+                   [(ngModel)]="sZip" placeholder="Zip code"/>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+          <div style="overflow: hidden; padding-bottom: 0px; display: flex; flex-direction: row;">
+            <div class="select--no-search" style="padding-top: 20px">
+              <select name="driver-age" [(ngModel)]="sCapacityCompare">
+                <option><</option>
+                <option><=</option>
+                <option>=</option>
+                <option>></option>
+                <option>>=</option>
+              </select>
+              <div class="select-dropdown"></div>
+            </div>
+            <mat-form-field class="no-underline">
+              <input class="input--style-1" type="number" name="capacity" style="margin-left: 5px;"
+                     matInput
+                     [(ngModel)]="sCapacity" placeholder="Capacity"/>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button class="submit-btn" (click)="searchEvents()">Search</button>
+    <button class="btn-delete" (click)="clearInput()">Clear Search</button>
+  </div>
+
+
+  <div class="container">
+    <ul class="responsive-table">
+      <li class="table-header" style="text-align: center">
+        <div style="flex-basis: 18%;">Organizer</div>
+        <div style="flex-basis: 13%;">Budget</div>
+        <div style="flex-basis: 24%;">Duration</div>
+        <div style="flex-basis: 18%;">Type</div>
+        <div style="flex-basis: 20%;">Address</div>
+        <div style="flex-basis: 6%;">Capacity</div>
+        <div style="padding-left:5px; flex-basis: 5%;">DEL</div>
+      </li>
+      <li class="table-row" style="text-align: center"
+          *ngFor="let event of events; let i = index"
+          [class.selected]="event === selectedEvent"
+          (click)="onSelect(event); openDialog()" >
+        <div style="flex-basis: 15%;">{{event.organizer}}</div>
+        <div style="flex-basis: 10%;">{{event.budget}}</div>
+        <div style="flex-basis: 20%;">{{event.startDate.toDateString()}} <br> to <br> {{event.endDate.toDateString()}}</div>
+        <div style="flex-basis: 14%;">{{event.eventType}}</div>
+        <div style="flex-basis: 20%;">{{event.address}}</div>
+        <div style="flex-basis: 6%;">{{event.capacity}}</div>
+        <div style="padding-left:5px; flex-basis: 5%;">
+          <button class="delete"
+                  style="margin-left: 10px;"
+                  (click)="$event.stopPropagation(); deleteEvent(i, event.eventID)"></button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

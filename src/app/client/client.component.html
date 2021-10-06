@@ -1,0 +1,62 @@
+<br>
+<div style="background-color:rgba(176, 196, 222, 0.3); padding:40px 30px; border-radius: 20px">
+    <h2>Account Details</h2>
+    <div style="font-size: 18px"><span>ID: </span>{{client.clientID}}</div>
+
+    <!-- First Name & Update -->
+    <div style="font-size: 18px; margin-top: 10px"><span>First Name: </span>{{client.clientFirstName}}
+        <button class="updatebutton" (click)="showUpdate('updateFirstName');">Update</button> </div>
+    <div id="updateFirstName" style='display:none'>
+        <!--<input style="font-size: 18px; margin-right: 20px" [ngModel]="client.clientFirstName" #change1> -->
+        <mat-form-field>
+            <input style="font-size: 18px; margin-right: 20px" maxlength="20" matInput
+                   [ngModel]="client.clientFirstName" [formControl]="first" #change1 />
+            <mat-error>{{getErrorMessage('first')}}</mat-error>
+        </mat-form-field>
+
+        <button class="updatebutton"
+                [disabled]="!valid('first')" (click)="update('updateFirstName', change1.value)">Save</button>
+    </div>
+
+    <!-- Last Name & Update -->
+    <div style="font-size: 18px; margin-top: 10px"><span>Last Name: </span>{{client.clientLastName}}
+        <button class="updatebutton" (click)="showUpdate('updateLastName')">Update</button> </div>
+    <div id="updateLastName" style='display:none'>
+        <mat-form-field>
+            <input style="font-size: 18px; margin-right: 20px" maxlength="20" matInput
+                   [ngModel]="client.clientLastName" #change2 />
+        </mat-form-field>
+        <button class="updatebutton" (click)="update('updateLastName', change2.value)">Save</button>
+    </div>
+
+    <!-- Email & Update -->
+    <div style="font-size: 18px; margin-top: 10px"><span>Email: </span>{{client.clientEmail}}
+        <button class="updatebutton" (click)="showUpdate('updateEmail');">Update</button> </div>
+    <div id="updateEmail" style='display:none'>
+        <mat-form-field>
+            <input style="font-size: 18px; margin-right: 20px" maxlength="20" matInput
+                   [ngModel]="client.clientEmail" [formControl]="email" #change3 />
+            <mat-error>{{getErrorMessage('email')}}</mat-error>
+        </mat-form-field>
+
+        <button class="updatebutton"
+                [disabled]="!valid('email')" (click)="update('updateEmail', change3.value)">Save</button>
+    </div>
+
+    <!-- Password & Update -->
+    <div style="font-size: 18px; margin-top: 10px"><span>Password: </span>
+        <button class="updatebutton" (click)="showUpdate('updatePassword');">Update</button> </div>
+    <div id="updatePassword" style='display:none'>
+        <mat-form-field>
+            <input style="font-size: 18px; margin-right: 20px" maxlength="30" matInput
+                   [type]="'password'"
+                   [ngModel]="client.clientPassword" [formControl]="password" #change4 />
+            <mat-error>{{getErrorMessage('password')}}</mat-error>
+        </mat-form-field>
+
+        <button class="updatebutton"
+                [disabled]="!valid('password')" (click)="update('updatePassword', change4.value)">Save</button>
+    </div>
+
+
+</div>

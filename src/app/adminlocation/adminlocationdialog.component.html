@@ -1,0 +1,53 @@
+<h3 mat-dialog-title>Information for Location {{data.locationID}}</h3>
+
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput
+               maxlength="100"
+               [(ngModel)]="data.streetAddress" [formControl]="street" placeholder="Street Address" required/>
+        <mat-error>{{getErrorMessage('street')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="20"
+               [(ngModel)]="data.apartmentNumber" [formControl]="ap" placeholder="Apartment Number" required/>
+        <mat-error>{{getErrorMessage('ap')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="50"
+               [(ngModel)]="data.city" [formControl]="city" placeholder="City" required/>
+        <mat-error>{{getErrorMessage('city')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="25"
+               [(ngModel)]="data.state" [formControl]="state" placeholder="State" required/>
+        <mat-error>{{getErrorMessage('state')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="10"
+               [(ngModel)]="data.zipcode" [formControl]="zip" placeholder="Zip code" required/>
+        <mat-error>{{getErrorMessage('zip')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="10"
+               [(ngModel)]="data.capacity" [formControl]="cap" placeholder="Capacity" required/>
+        <mat-error>{{getErrorMessage('cap')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="20"
+               [(ngModel)]="data.locationType" placeholder="Location Type"/>
+    </mat-form-field>
+
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button [mat-dialog-close]="data" [disabled]="!valid()" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

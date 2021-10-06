@@ -1,0 +1,45 @@
+<h3 mat-dialog-title>Choose Suppliers</h3>
+
+<mat-dialog-content>
+    <form [formGroup]="supplierForm">
+        <div formArrayName="items">
+            <div *ngFor="let item of items.controls; let itemIndex=index" [formGroupName]="itemIndex">
+                <mat-form-field>
+                    <mat-label>Item</mat-label>
+                    <mat-select ngDefaultControl
+                                [formControl]="supplierControl" formControlName="item" (selectionChange)="updatePrice()">
+                        <mat-option>-- None --</mat-option>
+                        <mat-optgroup [label]="'Catering'">
+                            <mat-option *ngFor="let supplier of data.catering" [value]="supplier">
+                                {{supplier.supplierDetail.name}}(${{supplier.price}})
+                            </mat-option>
+                        </mat-optgroup>
+                        <mat-optgroup [label]="'Decor'">
+                            <mat-option *ngFor="let supplier of data.decor" [value]="supplier">
+                                {{supplier.supplierDetail.name}}(${{supplier.price}})
+                            </mat-option>
+                        </mat-optgroup>
+                        <mat-optgroup [label]="'Entertain'">
+                            <mat-option *ngFor="let supplier of data.entertain" [value]="supplier">
+                                {{supplier.supplierDetail.name}}(${{supplier.price}})
+                            </mat-option>
+                        </mat-optgroup>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field style="margin-left: 10px">
+                    <input maxlength="30" matInput type="number"
+                           formControlName="amount" placeholder="Amount"
+                           (change)="updatePrice()"/>
+                </mat-form-field>
+                <button class="minus" style="margin-left: 10px; padding-bottom: 10px" (click)="deleteItems(itemIndex); updatePrice()"></button>
+            </div>
+            <button class="plus" (click)="addItems()"></button>
+        </div>
+    </form>
+    <h4>Budget: ${{data.budget}}    Total Price: ${{price}}</h4>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button [mat-dialog-close]="data" [disabled]="exceed() || !valid()" cdkFocusInitial>Book</button>
+</mat-dialog-actions>

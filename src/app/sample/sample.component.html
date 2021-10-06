@@ -1,0 +1,18 @@
+<br>
+<div style="background-color:rgba(176, 196, 222, 0.3); padding:40px 30px; border-radius: 20px">
+    <h2>Sample 0v0</h2>
+    <!-- Toggle -->
+    <div style="font-size: 18px">
+        <span>toggle element with id given_eid </span>
+        <button class="updatebutton" (click)="toggle('given_eid')">Show/Hide</button> </div>
+    <div id="given_eid" style='display:none'>
+        Default not shown by set display:none,
+    </div>
+    <!-- Update -->
+    ngModel should equal the thing you want to assign in component.ts, once save updateValue is triggered
+    <br>
+    <span>Current value: {{value}}</span>
+    <br>
+    <input style="font-size: 18px; margin-right: 20px" [ngModel]="value" #change>
+    <button class="updatebutton" (click)="updateValue('updateFirstName', change.value)">Save</button>
+</div>

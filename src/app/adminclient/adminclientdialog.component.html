@@ -1,0 +1,29 @@
+<h3 mat-dialog-title>Information for {{data.clientFirstName}}</h3>
+
+<mat-dialog-content>
+    <mat-form-field id="read-form">
+        <input matInput class="readonly" [readonly]="true" [(ngModel)]="data.clientID" placeholder="User ID"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="20"
+               [(ngModel)]="data.clientFirstName" [formControl]="first" placeholder="User First Name" required/>
+        <mat-error>{{getErrorMessage('first')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="20"
+               [(ngModel)]="data.clientLastName" placeholder="User Last Name"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="30"
+               [(ngModel)]="data.clientEmail" [formControl]="email" placeholder="User Email" required/>
+        <mat-error>{{getErrorMessage('email')}}</mat-error>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button [mat-dialog-close]="data" [disabled]="!valid()" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

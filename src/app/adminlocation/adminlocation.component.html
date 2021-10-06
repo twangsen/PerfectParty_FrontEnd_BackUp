@@ -1,0 +1,266 @@
+<br>
+<div style="background-color:rgba(176, 196, 222, 0.3); padding:40px 30px; border-radius: 20px">
+    <h2 style="text-align: center">All Locations</h2>
+    <div style="margin-left: 15%">
+        <button class="submit-btn" id='search'
+                style="width: 40%; display: inline; margin-right: 20px;"
+                (click)="show('search-locations'); show('search'); show('insert')">
+            Show Search
+        </button>
+        <button class="submit-btn" id='insert'
+                style="width: 40%; display: inline; margin-left: 20px;"
+                (click)="show('insert-locations'); show('insert'); show('search')">
+            Show Insert
+        </button>
+    </div>
+    <div style='display:none' id="search-locations">
+        <div class="card" style="padding: 20px;">
+            <div class="row row-space">
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="id" name="ID" placeholder="ID"
+                                   matInput
+                                   [(ngModel)]="sID"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="street" placeholder="Street"
+                                   matInput
+                                   [(ngModel)]="sStreetAddress"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="apartment" placeholder="Apartment NO."
+                                   matInput
+                                   [(ngModel)]="sApartmentNumber"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="city" placeholder="City"
+                                   matInput
+                                   [(ngModel)]="sCity" />
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="state" placeholder="State"
+                                   matInput
+                                   [(ngModel)]="sState" />
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="zip" placeholder="Zip Code"
+                                   matInput
+                                   [(ngModel)]="sZipCode"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="Type" placeholder="Location Type"
+                                   matInput
+                                   [(ngModel)]="sLocationType"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <div style="overflow: hidden; padding-bottom: 0px; display: flex; flex-direction: row;">
+                            <div class="select--no-search" style="padding-top: 20px">
+                                <select name="price-compare" [(ngModel)]="sCapacityCompare">
+                                    <option>></option>
+                                    <option>>=</option>
+                                    <option>=</option>
+                                    <option><</option>
+                                    <option><=</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                            <mat-form-field class="no-underline">
+                                <input class="input--style-1" type="number" name="capacity" placeholder="Capacity" style="margin-left: 5px;"
+                                       matInput
+                                       [(ngModel)]="sCapacity"/>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <button class="submit-btn" (click)="searchLocations()">Search</button>
+        </div>
+        <button class="btn-delete" (click)="clearInput()">Clear Search</button>
+        <button class="btn-delete" (click)="show('search-locations'); show('search'); show('insert')">Hide Search
+        </button>
+    </div>
+
+    <div style='display:none' id="insert-locations">
+        <div class="card" style="padding: 20px;">
+            <div class="row row-space">
+                <div class="col-4" style="margin-bottom: 10px;">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input readonly
+                                    maxlength="20" class="input--style-1" type="text" name="iLocationID" placeholder="Next Location ID is:"
+                                   matInput
+                                   [ngModel]="nextID"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="iStreetAddress" placeholder="Street Address"
+                                   matInput
+                                   [(ngModel)]="iStreetAddress" [formControl]="street" required/>
+                            <mat-error>{{getErrorMessage('street')}}</mat-error>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="iApartmentNum" placeholder="Apartment Number"
+                                   matInput
+                                   [(ngModel)]="iApartmentNumber" [formControl]="ap" required/>
+                            <mat-error>{{getErrorMessage('ap')}}</mat-error>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="iCity" placeholder="City"
+                                   matInput
+                                   [(ngModel)]="iCity" [formControl]="city" required/>
+                            <mat-error>{{getErrorMessage('city')}}</mat-error>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4" style="margin-bottom: 10px;">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="iSate" placeholder="State"
+                                   matInput
+                                   [(ngModel)]="iState" [formControl]="state" required/>
+                            <mat-error>{{getErrorMessage('state')}}</mat-error>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="iZipcode" placeholder="Zip Code"
+                                   matInput
+                                   [(ngModel)]="iZipCode" [formControl]="zip" required/>
+                            <mat-error>{{getErrorMessage('zip')}}</mat-error>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="number" name="iCapacity" placeholder="Capacity"
+                                   matInput
+                                   [(ngModel)]="iCapacity" [formControl]="cap" required/>
+                            <mat-error>{{getErrorMessage('cap')}}</mat-error>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input maxlength="20" class="input--style-1" type="text" name="Type" placeholder="Location Type"
+                                   matInput
+                                   [(ngModel)]="iLocationType"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+
+                <button class="submit-btn" style="margin-top: -3px"
+                        (click)="insertLocation(); show('insert-locations'); show('insert'); show('search')"
+                        [disabled]="!valid()">
+                    Insert
+                </button>
+            </div>
+        </div>
+        <button class="btn-delete" (click)="clearInput()">Clear Insert</button>
+        <button class="btn-delete" (click)="show('insert-locations'); show('insert'); show('search')">Hide Insert</button>
+    </div>
+
+    <br>
+    <div id="locations">
+        <br>
+        <div class="container">
+            <ul class="responsive-table">
+                <li class="table-header" style="text-align: center">
+                    <div class="col col-1" style="flex-basis: 15%;">Location ID</div>
+                    <div class="col col-2" style="flex-basis: 15%;">Address</div>
+                    <div class="col col-6" style="flex-basis: 12.5%;">Zip Code</div>
+                    <div class="col col-7" style="flex-basis: 12.5%;">Capacity</div>
+                    <div class="col col-8" style="flex-basis: 12.5%;">Type</div>
+                    <div class="col col-8" style="flex-basis: 12.5%;">Event Number</div>
+                </li>
+                <li class="table-row" style="text-align: center"
+                    *ngFor="let location of locations"
+                    [class.selected]="location === selectedLocation"
+                    (click)="onSelect(location); openDialog()">
+                    <div class="col col-1" style="flex-basis: 15%; padding-right: 10px">{{location.locationID}}</div>
+                    <div class="col col-2" style="flex-basis: 15%; text-align: left">
+                        {{location.apartmentNumber}} {{location.streetAddress}}
+                        <br>
+                        {{location.city}}
+                        <br>
+                        {{location.state}}
+                    </div>
+                    <div class="col col-6" style="flex-basis: 12.5%;">{{location.zipcode}}</div>
+                    <div class="col col-7" style="flex-basis: 12.5%;">{{location.capacity}}</div>
+                    <div class="col col-8" style="flex-basis: 12.5%;">{{location.locationType}}</div>
+                    <div class="col col-8" style="flex-basis: 12.5%;">{{location.eventNum}}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

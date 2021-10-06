@@ -1,0 +1,31 @@
+<h3 mat-dialog-title>User Registration</h3>
+
+<mat-dialog-content>
+    <mat-form-field>
+        <input maxlength="10"
+                matInput
+                readonly
+                [(ngModel)]="data.clientID"
+                placeholder="Your ID will be"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input maxlength="20" matInput [(ngModel)]="data.clientFirstName" [formControl]="first" placeholder="First Name"/>
+        <mat-error>{{getErrorMessage('first')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input maxlength="20" matInput [(ngModel)]="data.clientLastName" placeholder="Last Name"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input maxlength="20" matInput [(ngModel)]="data.clientPassword" [formControl]="password" placeholder="Password"/>
+        <mat-error>{{getErrorMessage('password')}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input maxlength="30" matInput [(ngModel)]="data.clientEmail" [formControl]="email" placeholder="Email"/>
+        <mat-error>{{getErrorMessage('email')}}</mat-error>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="!valid()">Sign Up</button>
+</mat-dialog-actions>

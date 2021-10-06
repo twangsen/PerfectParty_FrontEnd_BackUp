@@ -1,0 +1,154 @@
+<br>
+<div style="background-color:rgba(176, 196, 222, 0.3); padding:30px 30px; border-radius: 20px">
+    <h2 style="text-align: center">All Suppliers</h2>
+    <div style="margin-left: 15%">
+        <button class="submit-btn" id='search'
+                style="width: 40%; display: inline; margin-right: 20px;"
+                (click)="show('search-suppliers'); show('search'); show('insert')">
+            Show Search
+        </button>
+        <button class="submit-btn" id='insert'
+                style="width: 40%; display: inline; margin-left: 20px;"
+                (click)="show('insert-suppliers'); show('insert'); show('search')">
+            Show Insert
+        </button>
+    </div>
+
+    <div style='display:none' id="search-suppliers">
+        <div class="card" style="padding: 20px;">
+            <div class="row row-space">
+                <div class="col-3">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input class="input--style-1" type="text" name="name" style="margin-left: 5px;"
+                                matInput
+                                [(ngModel)]="sName" placeholder="Supplier Name"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <div style="overflow: hidden; padding-bottom: 0px; display: flex; flex-direction: row;">
+                            <div class="select--no-search" style="padding-top: 20px">
+                                <select name="price-compare" [(ngModel)]="sPriceCompare">
+                                    <option><</option>
+                                    <option><=</option>
+                                    <option>=</option>
+                                    <option>></option>
+                                    <option>>=</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                            <mat-form-field class="no-underline">
+                                <input class="input--style-1" type="number" name="price" style="margin-left: 5px;"
+                                matInput
+                                [(ngModel)]="sPrice" placeholder="Price"/>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <div style="overflow: hidden; padding-bottom: 0px; display: flex; flex-direction: row;">
+                            <mat-form-field class="no-underline">
+                                <mat-label>Type</mat-label>
+                                <mat-select name="type" [(ngModel)]="sType">
+                                    <mat-option [value]="'Catering'">Catering</mat-option>
+                                    <mat-option [value]="'Entertain'">Entertain</mat-option>
+                                    <mat-option [value]="'Decor'">Decor</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="submit-btn" (click)="searchSuppliers()">search</button>
+        </div>
+        <button class="btn-delete" (click)="clearInput()">Clear Search</button>
+        <button class="btn-delete" (click)="show('search-suppliers'); show('search'); show('insert')">Hide Search</button>
+    </div>
+
+    <div style='display:none' id="insert-suppliers">
+        <div class="card" style="padding: 20px; margin-bottom: 0;">
+            <div class="row row-space">
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input readonly class="input--style-1" type="text" name="id" style="margin-left: 5px;"
+                            matInput
+                            [(ngModel)]="nextID" placeholder="Next supplier ID is:" />
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input class="input--style-1" type="text" name="first" style="margin-left: 5px;"
+                            matInput
+                                   maxlength="10"
+                            [(ngModel)]="iName" placeholder="Supplier Name"/>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <mat-form-field class="no-underline">
+                            <input class="input--style-1" type="number" name="last" style="margin-left: 5px;"
+                            matInput
+                            [(ngModel)]="iPrice" [formControl]="price" placeholder="Price" required/>
+                            <mat-error>{{getErrorMessage('price')}}</mat-error>
+                        </mat-form-field>
+                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="input-group" style="height: 60px !important; max-height: 60px !important;">
+                        <div style="overflow: hidden; padding-bottom: 0px; display: flex; flex-direction: row;">
+                            <mat-form-field class="no-underline">
+                                <mat-label>Type</mat-label>
+                                <mat-select name="type" [(ngModel)]="iType" [formControl]="type">
+                                    <mat-option [value]="'Catering'">Catering</mat-option>
+                                    <mat-option [value]="'Entertain'">Entertain</mat-option>
+                                    <mat-option [value]="'Decor'">Decor</mat-option>
+                                </mat-select>
+                                <mat-error>{{getErrorMessage('type')}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="submit-btn"
+                    (click)="insertSupplier(); show('insert-suppliers'); show('insert'); show('search')"
+                    [disabled]="!valid()">
+                Insert
+            </button>
+        </div>
+        <button class="btn-delete" (click)="clearInput()">Clear Insert</button>
+        <button class="btn-delete" (click)="show('insert-suppliers'); show('insert'); show('search')">Hide Insert</button>
+    </div>
+
+    <br>
+    <div class="container">
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">ID</div>
+                <div class="col col-2">Name</div>
+                <div class="col col-3">Type</div>
+                <div class="col col-4">Price</div>
+            </li>
+            <li class="table-row"
+                *ngFor="let supplier of suppliers"
+                [class.selected]="supplier === selectedSupplier"
+                (click)="onSelect(supplier) ;openDialog()">
+                <div class="col col-1">{{supplier.supplierID}}</div>
+                <div class="col col-2">{{supplier.supplierDetail.name}}</div>
+                <div class="col col-3">{{supplier.supplierType}}</div>
+                <div class="col col-4">{{supplier.price}}</div>
+            </li>
+        </ul>
+    </div>
+
+</div>

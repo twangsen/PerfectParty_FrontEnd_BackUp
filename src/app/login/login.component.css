@@ -1,0 +1,213 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 1px 0;
+    height: 100%;
+    width: 100%;
+    background-image: url(../../login_background.jpg);
+    background-size: cover;
+    color: #fff;
+    font-family: "Comfortaa", "Helvetica", sans-serif;
+}
+
+.login {
+    max-width: 280px;
+    min-height: 500px;
+    margin: 30px auto;
+    background-color: rgba(0, 14, 47, 0.68);
+    border-radius: 10px;
+}
+
+.login-icon-field {
+    height: 250px;
+    width: 100%;
+    /*background-color: red;*/
+}
+
+.login-icon {
+    margin: 50px 65px;
+    background-size: 150px;
+    background-color: transparent;
+    background-image: url(../../logo.png);
+    background-repeat: no-repeat;
+    -webkit-filter: invert(100%);
+}
+
+.login-form {
+    padding: 8px 20px 20px;
+    height: 120px;
+    width: 100%;
+    background-color: transparent;
+}
+
+.row {
+    display: none;
+}
+
+.username-row {
+    position: relative;
+    height: 40px;
+    border-bottom: 1px solid;
+    margin-bottom: 10px;
+}
+
+.password-row {
+    position: relative;
+    height: 40px;
+    border-bottom: 1px solid;
+}
+
+.password-icon {
+    margin: 5px;
+    background-size: 25px;
+    background-color: transparent;
+    background-image: url(../../password.png);
+    background-repeat: no-repeat;
+    -webkit-filter: invert(100%);
+}
+
+.user-icon {
+    margin: 5px;
+    background-size: 30px;
+    background-color: transparent;
+    background-image: url(../../user.png);
+    background-repeat: no-repeat;
+    -webkit-filter: invert(100%);
+}
+
+.password-icon .key-path,
+.user-icon .user-path{
+    fill: rgba(10,10,10,0);
+    stroke: #fff;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    -webkit-animation: dash 3s .3s linear forwards;
+    animation: dash 3s .3s linear forwards;
+}
+
+.user-icon .user-path {
+    -webkit-animation: dash 3s .8s linear forwards;
+    animation: dash 3s .8s linear forwards;
+}
+
+input {
+    font-family: 'Alice', serif;
+    font-size: 150%;
+    color: white;
+    position: absolute;
+    width: 195px;
+    height: 30px;
+    margin: 5px 0;
+    background: transparent;
+    border: none;
+}
+
+input:focus,
+button:focus {
+    outline: none;
+}
+
+input::-webkit-input-placeholder {
+    color: rgba(255,255,255,.4);
+}
+
+input::-moz-placeholder {
+    color: rgba(255,255,255,.4);
+}
+
+.call-to-action {
+    margin: 22px 0;
+    height: 130px;
+    width: 100%;
+    /*background-color: blue;*/
+}
+
+.login-button {
+    display: block;
+    width: 240px;
+    height: 40px;
+    padding: 0;
+    margin: 10px 20px 10px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #b6deec;
+    border: none;
+    border-radius: 20px;
+    transition: background-color .10s ease-in-out;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.login-button:hover {
+    background-color: #819ea8;
+}
+
+.login-button:active {
+    background-color: #819ea8;
+}
+
+.signup-button {
+    display: inline;
+    text-align: center;
+    width: 235px;
+    height: 40px;
+    padding: 0;
+    margin: 0 20px 10px;
+    font-weight: 700;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    border-radius: 20px;
+    transition: background-color .10s ease-in-out;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.signup-button:hover {
+    color: #8f9ea6;
+}
+
+.signup-button:active {
+    color: #8f9ea6;
+}
+
+p {
+    display: inline-block;
+    width: 200px;
+    margin: 0 40px;
+    font-size: .8rem;
+    color: rgba(255,255,255,.4);
+    /*background-color: yellow;*/
+}
+
+p a {
+    color: #fff;
+}
+
+label,
+p a:hover {
+    -webkit-cursor: pointer;
+    cursor: pointer;
+}
+
+@-webkit-keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

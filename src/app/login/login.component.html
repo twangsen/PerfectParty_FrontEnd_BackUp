@@ -1,0 +1,42 @@
+<div style="width:100%; height:100%; position:fixed; left:0; top:0; overflow:hidden;">
+    <div class="container">
+        <div id="login" class="login">
+            <div class="login-icon-field">
+                <svg class="login-icon" x="0px" y="0px" height="160px" width="160px">
+                </svg>
+            </div>
+            <div class="login-form">
+                <div class="username-row">
+                    <label for="username_input">
+                        <svg class="user-icon" x="0px" y="0px"
+                             xml:space="preserve" height="36px" width="30px">
+                        </svg>
+                    </label>
+                    <input type="text"
+                           id="username_input"
+                           class="username-input"
+                           placeholder="UserID"
+                           maxlength="10"
+                           [(ngModel)]="userid" required>
+                </div>
+                <div class="password-row">
+                    <label for="password_input">
+                        <svg class="password-icon" x="0px" y="0px"
+                             viewBox="-255 347 100 100" height="36px" width="30px">
+                        </svg>
+                    </label>
+                    <input type="password"
+                           id="password_input"
+                           class="password-input"
+                           placeholder="Password"
+                           maxlength="20"
+                           [(ngModel)]="password" required>
+                </div>
+            </div>
+            <div class="call-to-action">
+                <button class="login-button" type="button" (click)="login()">Log In</button>
+                <button class="signup-button" type="button" (click)="openDialog(); setID()">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>

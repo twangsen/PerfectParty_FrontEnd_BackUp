@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Information for Supply Item {{data.supplierID}}</h1>
+
+
+<mat-dialog-content>
+    <mat-form-field id="read-form" class="no-underline">
+        <input matInput [readonly]="true" [(ngModel)]="data.supplierType" placeholder="Supplier Type"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="10"
+               [(ngModel)]="data.supplierDetail.type" placeholder="Type"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input
+                matInput
+                maxlength="10"
+                [(ngModel)]="data.supplierDetail.name" placeholder="Name"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput
+               maxlength="10"
+               [(ngModel)]="data.price" [formControl]="price" placeholder="Price" required/>
+        <mat-error>{{getErrorMessage('price')}}</mat-error>
+    </mat-form-field>
+    <br>
+    <div class="container" *ngIf="data.events.length !== 0">
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">Relevant Event ID</div>
+                <div class="col col-2">Budget</div>
+            </li>
+            <li class="table-row"
+                *ngFor="let event of data.events">
+                <div class="col col-1">{{event.eventID}}</div>
+                <div class="col col-2">{{event.budget}}</div>
+            </li>
+        </ul>
+    </div>
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button [mat-dialog-close]="data" [disabled]="!valid()" cdkFocusInitial>Ok</button>
+</div>

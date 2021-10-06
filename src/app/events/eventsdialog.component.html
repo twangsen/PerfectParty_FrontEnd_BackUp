@@ -1,0 +1,51 @@
+<h3 style="text-align: center" mat-dialog-title>Information for Event {{data.eventID}}</h3>
+
+<mat-dialog-content>
+    <mat-form-field>
+        <input maxlength="20" matInput [(ngModel)]="data.eventType" placeholder="Event Type"/>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input [type]="'number'" matInput [(ngModel)]="data.budget" [formControl]="budget" placeholder="Budget" required/>
+        <mat-error>{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input maxlength="20" matInput [(ngModel)]="data.organizer" placeholder="Organizer"/>
+    </mat-form-field>
+    <br>
+    <div id="read-form">
+        <mat-form-field style="width:100% !important">
+            <input matInput class="readonly" [readonly]="true" [(ngModel)]="data.startDate" placeholder="Start Date"/>
+        </mat-form-field>
+        <br>
+        <mat-form-field style="width:100% !important">
+            <input matInput class="readonly" [readonly]="true" [(ngModel)]="data.endDate" placeholder="End Date"/>
+        </mat-form-field>
+        <br>
+        <mat-form-field style="width:100% !important">
+            <input matInput class="readonly" [readonly]="true" [(ngModel)]="data.address" placeholder="Location"/>
+        </mat-form-field>
+    </div>
+    <br>
+    <div class="container" *ngIf="data.supplies.length !== 0">
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">Supply</div>
+                <div class="col col-2">Amount</div>
+                <div class="col col-3">Type</div>
+            </li>
+            <li class="table-row"
+                *ngFor="let supplier of data.supplies">
+                <div class="col col-1">{{supplier.supplyName}}</div>
+                <div class="col col-2">{{supplier.supplyAmount}}</div>
+                <div class="col col-3">{{supplier.supplyType}}</div>
+            </li>
+        </ul>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="!valid()">Ok</button>
+</mat-dialog-actions>

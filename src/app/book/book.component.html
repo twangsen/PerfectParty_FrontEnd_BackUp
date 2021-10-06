@@ -1,0 +1,85 @@
+<br>
+<div style="background-color:rgba(176, 196, 222, 0.3); padding:40px 30px; border-radius: 20px">
+    <h2 style="text-align: center">Book a New Event</h2>
+
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="container">
+                <div class="row">
+                    <div class="booking-form">
+                        <div class="booking-bg">
+                            <div class="form-header">
+                                <h2>Make your reservation</h2>
+                                <p>Idea starts here</p>
+                            </div>
+                        </div>
+                        <div style="margin-left: 425px; padding: 30px;">
+                            <mat-form-field>
+                                <input matInput type="number"
+                                       maxlength="10"
+                                       [(ngModel)]="tempEvent.budget" [formControl]="b" placeholder="Budget" required/>
+                                <mat-error>{{getErrorMessage('b')}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="date"
+                                       matInput [(ngModel)]="SD" [formControl]="startD" placeholder="Start Date" required/>
+                                <mat-error>{{getErrorMessage('startD')}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="time"
+                                       matInput [(ngModel)]="ST" [formControl]="startT" placeholder="Start Time" required/>
+                                <mat-error>{{getErrorMessage('startT')}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="date"
+                                       matInput [(ngModel)]="ED" [formControl]="endD" placeholder="End Date" required/>
+                                <mat-error>{{getErrorMessage('endD')}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="time"
+                                       matInput [(ngModel)]="ET" [formControl]="endT" placeholder="End Time" required/>
+                                <mat-error>{{getErrorMessage('endT')}}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput
+                                       maxlength="20"
+                                       [(ngModel)]="tempEvent.eventType" placeholder="Event Type"/>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput
+                                       maxlength="20"
+                                       [(ngModel)]="tempEvent.organizer" placeholder="Organizer"/>
+                            </mat-form-field>
+
+                            <div class="form-btn">
+                                <button class="submit-btn"
+                                (click)="searchLocations()" [disabled]="!valid()">Check availability</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="container">
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">ID</div>
+                <div class="col col-2">Capacity</div>
+                <div class="col col-3">Type</div>
+                <div class="col col-4">Address</div>
+            </li>
+            <li class="table-row"
+                *ngFor="let location of locations"
+                [class.selected]="location === selectedLocation"
+                (click)="onSelect(location); openDialog();">
+                <div class="col col-1">{{location.locationID}}</div>
+                <div class="col col-4">{{location.capacity}}</div>
+                <div class="col col-2">{{location.locationType}}</div>
+                <div class="col col-3">{{location.address}}</div>
+            </li>
+        </ul>
+    </div>
+</div>

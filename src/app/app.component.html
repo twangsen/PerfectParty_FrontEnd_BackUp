@@ -1,0 +1,35 @@
+<div *ngIf="loggedin()">
+  <header id="header">
+    <div class="inner">
+    </div>
+  </header>
+
+  <section id="banner">
+    <div style="margin-left: auto; margin-right: auto; display: inline-block">
+      <img class="login-icon" src="../logo.png"
+           style="width: 50px;float: left; margin-right: 10px;"/>
+
+      <div style="float: left">
+        <h1 style="alignment: left;">Perfect Party</h1>
+      </div>
+    </div>
+    <p style="clear: both; margin-top: 0;">Booking and managing your events quicker and easier</p>
+  </section>
+
+  <div class="toolbar" style="margin-top: 20px">
+      <div class="menuname"> Menu </div>
+      <div style="float: left;">
+        <div class="menuitem" routerLink="/home" *ngIf="!isAdmin()"> Home </div>
+        <div class="menuitem" routerLink="/admin" *ngIf="isAdmin()"> Admin </div>
+        <div class="menuitem" routerLink="/account" *ngIf="!isAdmin()"> Account </div>
+        <div class="menuitem" routerLink="/admin/client" *ngIf="isAdmin()"> Clients </div>
+        <div class="menuitem" routerLink="/event"> Events </div>
+        <div class="menuitem" routerLink="/book" *ngIf="!isAdmin()"> Book </div>
+
+        <div class="menuitem" routerLink="/admin/supplier" *ngIf="isAdmin()"> Suppliers </div>
+        <div class="menuitem" routerLink="/admin/location" *ngIf="isAdmin()"> Locations </div>
+        <div class="menuitem" routerLink="/"> Log Out </div>
+      </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,187 @@
+/* You can add global styles to this file, and also import other style files */
+/* Application-wide Styles */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html {
+  background-image: url(background.jpg);
+}
+
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+h2 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 170%;
+}
+h3 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+body {
+  margin: 2em;
+}
+body, input[type="text"], button {
+  color: #333;
+  font-family: Cambria, Georgia;
+}
+/* everywhere else */
+.menuitem {
+  width: 120px;
+  height: 23px;
+  padding: 13px 0 15px;
+  font-size: 110%;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  background-color: transparent;
+}
+
+.menuname {
+  height: 23px;
+  margin-left: 20px;
+  padding: 11px 0 15px;
+  font-size: 120%;
+  font-weight: bold;
+  text-align: center;
+  display: inline;
+  background-color: transparent;
+  float: left;
+}
+
+.menuitem:visited, .menuitem:link {
+  color: #334953;
+}
+.menuitem:hover {
+  color: #039be5;
+  background-color: transparent;
+}
+.menuitem.active {
+  color: #039be5;
+}
+
+/* background image */
+.image{
+  height:40em; background-size:cover; width:auto;
+  background-image:url(background.jpg);
+  background-position:50% 50%;
+}
+
+/* toolbar */
+.toolbar {
+  height: 50px;
+  font-size: 120%;
+  text-decoration: none;
+  text-align: center;
+  background-color: rgba(131, 184, 255, 0.2);
+  border-radius: 20px;
+}
+
+.toolbar:visited, .toolbar:link {
+  color: #334953;
+}
+
+/* table */
+table.eventTable {
+  border-collapse: collapse;
+}
+
+body {
+  font-family: 'lato', sans-serif;
+}
+
+/* button */
+nav b {
+  color: #83b8ff;
+  font-size: 150%;
+  height: 35px;
+  width: 160px;
+  padding: 50px 10px;
+  text-decoration: none;
+  text-align: center;
+  margin: 30px;
+  display: inline-block;
+  background-color: #eee;
+  background-size: 200px;
+  background-repeat: repeat-x;
+  border-radius: 10px;
+}
+
+nav b:visited, b:link {
+  color: #334953;
+}
+nav b:hover {
+  color: #002a70;
+  background-color: #b6deec;
+  opacity: 0.6;
+  filter: alpha(opacity=70);
+}
+
+nav b.active {
+  color: #039be5;
+}
+
+nav .navhome {
+  background-size: 250px;
+  background-image: url(home.jpg);
+}
+
+nav .navevent {
+  background-size: 250px;
+  background-image: url(event.jpg);
+}
+
+nav .navbook {
+  background-image: url(book.jpg);
+}
+
+nav .navsearch {
+  background-size: 250px;
+  background-image: url(search.jpg);
+}
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* button */
+.delete {
+  background-image: url("delete.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  padding: 12px 12px;
+}
+
+.delete:hover {
+  background-image: url("delete.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  padding: 12px 12px;
+  opacity: 0.5 !important;
+}
+
+.delete:active {
+  background-image: url("delete.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  padding: 12px 12px;
+}
